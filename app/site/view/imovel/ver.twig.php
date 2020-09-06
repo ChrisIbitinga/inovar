@@ -30,7 +30,10 @@
 			{{imovel.slug}}
 		</p>
 		<p>
-		  {{imovel.categoria.nomeCategoria}}
+		  {{imovel.valor}}
+		</p>
+		<p>
+		  {{imovel.usuario.nomesuario}}
 		</p>
 
 
