@@ -14,14 +14,14 @@ use app\site\model\ImovelModel;
 class ImovelController extends Controller
 {
 
- private $imovelModel;
+   private $imovelModel;
 
 
 
- public function __construct()
- {
+   public function __construct()
+   {
     $this->imovelModel = new ImovelModel();
-   
+
 } 
 
 public function index()
@@ -35,18 +35,21 @@ public function ver(string $slug = '')
 {
     $slug = filter_var($slug, FILTER_SANITIZE_STRING);
 
-     $imovel = $this->imovelModel->getBySlug($slug);
-    
+    $imovel = $this->imovelModel->getBySlug($slug);
+      // dd($imovel);
 
     if ($imovel->getSlug() == null)
         return $this->showMessage('Imovel não encontrado', 'Droga', 404);
 
 
     $this->view('imovel/ver', [
-        'imovel' => $imovel,
+        'imovel' => $imovel
         
     ]);
+    dd($imovel);
+
 }
+
 
 
 
@@ -275,12 +278,6 @@ private function getInput($id = null)
 
     );
 }
-
-
-
-
-
-
 
 
 }

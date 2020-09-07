@@ -136,9 +136,9 @@ Home
 							{% endif %}
 						</div>
 						<div class="card-content">
-							<span class="card-title activator blue-grey-text text-darken-4">{{item.slug}}<i class="material-icons right ">search
+							<span class="card-title activator blue-grey-text text-darken-4">{{item.categoria.nomeCategoria}}<i class="material-icons right ">search
 							</i></span>
-							<p class="grey-text text-darken-2">{{imovel.valor}}</p>
+							<p class="grey-text text-darken-2">{{item.valor}}</p>
 							<hr>
 							<i class="material-icons amber-text text-darken-2">star</i>
 							<i class="material-icons amber-text text-darken-2">star</i>
@@ -151,16 +151,19 @@ Home
 						</div>
 						<div class="card-reveal">
 							<span class="card-title grey-text text-darken-4">{{item.valor}}<i class="material-icons right">close</i></span>
-							<p>Nações unidas 442</p>
+							<p>{{item.endereco}} {{item.numero}}</p>
+							<p>
+								{{item.bairro}}
+							</p>
 							<div class="box-card-info">
-								<i class="material-icons">hotel</i> - 4 Quarto(s)
+								<i class="material-icons">hotel</i> - {{item.quarto}} Quarto(s)
 							</div>
 							<div class="box-card-info">
-								<i class="material-icons">hot_tub</i> - 2 suite(s)
+								<i class="material-icons">hot_tub</i> - {{item.banheiro}} banheiro(s)
 							</div>
 							<div class="box-card-info">
 								<i class="material-icons">time_to_leave
-								</i> - 2 vaga(s)
+								</i> - {{item.garagem}} vaga(s)
 							</div>
 						</div>
 					</div>

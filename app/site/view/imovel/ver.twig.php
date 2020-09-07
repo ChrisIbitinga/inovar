@@ -30,11 +30,18 @@
 			{{imovel.slug}}
 		</p>
 		<p>
+			<span class="bold">Publicado por:</span> {{imovel.tipo.tipoNome}}
+		</p>
+		<p>
+
+			
 		  {{imovel.valor}}
 		</p>
 		<p>
-		  {{imovel.usuario.nomesuario}}
+	
 		</p>
+
+
 
 
 

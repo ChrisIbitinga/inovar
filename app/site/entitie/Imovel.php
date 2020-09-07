@@ -34,7 +34,8 @@ class Imovel
 	(
 		$id = null, $id_tipo = null, $id_destinacao = null, $id_categoria = null, $id_usuario = null, 
 		$id_cidade = null, $data_cadastro = null, $endereco = null, $numero = null, $valor = null, $bairro = null, 
-		$sala = null, $quarto = null, $banheiro = null, $garagem = null, $slug =  null, $adicionais = null, $status = 1, $thumb = null
+		$sala = null, $quarto = null, $banheiro = null, $garagem = null, $slug =  null, $adicionais = null, $status = 1,
+         $thumb = null
 	)
 
 	{

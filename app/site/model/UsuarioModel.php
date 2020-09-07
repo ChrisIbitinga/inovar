@@ -146,6 +146,19 @@ class UsuarioModel
 
         return $this->collection($dr);
     }
+    public function getUsuarios()
+    {
+        $sql = 'SELECT * FROM usuario ORDER BY nome DESC';
+
+        $dt = $this->pdo->ExecuteQuery($sql);
+
+        $list = [];
+
+        foreach ($dt as $dr)
+            $list[] = $this->collection($dr);
+
+        return $list;
+    }
 
     private function collection($param)
     {
