@@ -122,8 +122,28 @@ Home
 
 				
 
+     
+<pre>
+
+
+
+</pre>
+<pre>
+    
+</pre>
+
+							{{categoria.nome}}
+
 				{% for imovel in imoveis %}
-				{%for item in imovel %}
+
+				<!-- {{ dump(imovel) }} -->
+
+				{% for item in imovel %}
+<!-- {{ dump(item.categoria.nome) }} -->
+				
+
+
+				
 
 				<div class="col s12 m4">
 					<div class="card hoverable">
@@ -136,9 +156,11 @@ Home
 							{% endif %}
 						</div>
 						<div class="card-content">
-							<span class="card-title activator blue-grey-text text-darken-4">{{item.categoria.nomeCategoria}}<i class="material-icons right ">search
+							<span class="card-title activator blue-grey-text text-darken-4">{{item.categoria.nome}}<i class="material-icons right ">search
 							</i></span>
-							<p class="grey-text text-darken-2">{{item.valor}}</p>
+							<p>
+							</p>
+							<p class="grey-text text-darken-2">{{detalhe.valor}}</p>
 							<hr>
 							<i class="material-icons amber-text text-darken-2">star</i>
 							<i class="material-icons amber-text text-darken-2">star</i>
@@ -169,6 +191,7 @@ Home
 					</div>
 				</div>
 
+	
 				{% endfor %}
 				{% endfor %}
 

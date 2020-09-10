@@ -50,6 +50,19 @@ class TipoModel
         ]));
     }
 
+      public function getPorId($id_imovel)
+    {
+          $sql = 'SELECT DISTINCT t.id_tipo, t.nome_tipo, i.id, i.id_tipo FROM tipo t
+          inner join imovel i
+          on t.id_tipo = i.id_tipo
+           WHERE i.id = :id_imovel';
+
+           return $this->collection($this->pdo->ExecuteQueryOneRow($sql, [
+            ':id_imovel' => $id_imovel
+        ]));
+
+    }
+
     public function getBySlug(string $slug_tipo)
     {
         $sql = 'SELECT nome_tipo FROM tipo WHERE slug_tipo = :slug_tipo';

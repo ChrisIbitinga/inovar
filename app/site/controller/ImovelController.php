@@ -4,8 +4,10 @@ namespace app\site\controller;
 
 use app\core\Controller;
 use app\site\entitie\Tipo;
+use app\site\model\TipoModel;
 use app\site\entitie\Finalidade;
 use app\site\entitie\Categoria;
+use app\site\model\CategoriaModel;
 use app\site\entitie\Usuario;
 use app\site\entitie\Cidade;
 use app\site\entitie\Imovel;
@@ -14,13 +16,15 @@ use app\site\model\ImovelModel;
 class ImovelController extends Controller
 {
 
-   private $imovelModel;
+   private $categoriaModel;
 
 
 
    public function __construct()
    {
     $this->imovelModel = new ImovelModel();
+    $this->categoriaModel = new CategoriaModel();
+     $this->tipoModel = new TipoModel();
 
 } 
 
@@ -31,22 +35,27 @@ public function index()
 
 
 
-public function ver(string $slug = '')
+public function ver(string $slug = '', $id_imovel = '')
 {
     $slug = filter_var($slug, FILTER_SANITIZE_STRING);
 
+    $id_imovel = filter_var($id_imovel, FILTER_SANITIZE_NUMBER_INT);
+
     $imovel = $this->imovelModel->getBySlug($slug);
-      // dd($imovel);
+    $categoria = $this->categoriaModel->getPorId($id_imovel);
+    $tipo = $this->tipoModel->getPorId($id_imovel);
 
     if ($imovel->getSlug() == null)
         return $this->showMessage('Imovel não encontrado', 'Droga', 404);
 
 
     $this->view('imovel/ver', [
-        'imovel' => $imovel
+        'imovel' => $imovel,
+        'categoria' => $categoria,
+        'tipo' => $tipo
         
     ]);
-    dd($imovel);
+    
 
 }
 

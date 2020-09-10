@@ -160,6 +160,22 @@ class UsuarioModel
         return $list;
     }
 
+
+    public function getAll()
+    {
+        $sql = 'SELECT * FROM usuario ORDER BY nome ASC';
+
+
+
+        $dt = $this->pdo->ExecuteQuery($sql);
+
+        $list = [];
+
+        foreach ($dt as $dr)
+            $list[] = $this->collection($dr);
+
+        return $list; dd($list);
+    }
     private function collection($param)
     {
         return new Usuario(

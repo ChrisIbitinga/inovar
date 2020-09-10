@@ -3,6 +3,7 @@
 namespace app\site\model;
 
 use app\site\entitie\Categoria;
+use app\site\entitie\Imovel;
 
 use app\core\Model;
 
@@ -41,6 +42,20 @@ class CategoriaModel
         return $this->pdo->ExecuteNonQuery($sql, $params);
     }
 
+    public function getPorId($id_imovel)
+    {
+          $sql = 'SELECT DISTINCT c.id_categoria, c.nome_categoria, i.id, i.id_categoria FROM categoria c
+          inner join imovel i
+          on c.id_categoria = i.id_categoria
+           WHERE i.id = :id_imovel';
+
+           return $this->collection($this->pdo->ExecuteQueryOneRow($sql, [
+            ':id_imovel' => $id_imovel
+        ]));
+
+    }
+
+
     public function getById(int $id_categoria)
     {
         $sql = 'SELECT * FROM categoria WHERE id_categoria = :id_categoria';
@@ -78,7 +93,11 @@ class CategoriaModel
         return new Categoria(
             $param['id_categoria'] ?? null,
             $param['nome_categoria'] ?? null,
-            $param['slug_categoria'] ?? null
+            $param['slug_categoria'] ?? null,
+            new Imovel(
+             $param['id'] ?? null,
+            )
+
         );
     }
 }

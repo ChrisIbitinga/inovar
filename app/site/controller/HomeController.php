@@ -8,6 +8,8 @@ use app\site\entitie\Tipo;
 use app\site\model\TipoModel;
 use app\site\entitie\Categoria;
 use app\site\model\CategoriaModel;
+use app\site\entitie\Usuario;
+use app\site\model\UsuarioModel;
 
 class HomeController extends Controller
 {
@@ -15,12 +17,14 @@ class HomeController extends Controller
     private $finalidadeModel;
     private $tipoModel;
     private $categoriaModel;
+    private $usuarioModel;
 
     public function __construct()
     {
       $this->finalidadeModel = new FinalidadeModel();
       $this->tipoModel = new TipoModel();
       $this->categoriaModel = new CategoriaModel();
+      $this->usuarioModel = new UsuarioModel();
     }
     /**
      * index
@@ -35,12 +39,13 @@ class HomeController extends Controller
 
       $imoveis = (new \app\site\model\ImovelModel())->getLasts(12);
        $this->view('home/main', [
-          'finalidades' => $this->finalidadeModel->getAll(),
-          'tipos' => $this->tipoModel->getAll(),
-          'categorias' => $this->categoriaModel->getAll(),
-          'imoveis' => arrayTree($imoveis, 4)
+          'imoveis' => arrayTree($imoveis, 4),
+           'categorias' => $this->categoriaModel->getAll(),
+           'tipos' => $this->tipoModel->getAll(),
+           'finalidades' => $this->finalidadeModel->getAll(),
+           'usuarios' => $this->usuarioModel->getAll(),
        ]);
-   dd( $imoveis);
+        dd($imoveis);
     }
 
 
