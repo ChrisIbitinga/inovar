@@ -3,28 +3,58 @@
 namespace app\site\controller;
 
 use app\core\Controller;
+
 use app\site\entitie\Tipo;
 use app\site\model\TipoModel;
+
 use app\site\entitie\Finalidade;
+use app\site\model\FinalidadeModel;
+
 use app\site\entitie\Categoria;
 use app\site\model\CategoriaModel;
+
 use app\site\entitie\Usuario;
+use app\site\model\UsuarioModel;
+
 use app\site\entitie\Cidade;
+use app\site\model\CidadeModel;
+
+use app\site\entitie\Foto;
+use app\site\model\FotoModel;
+
 use app\site\entitie\Imovel;
 use app\site\model\ImovelModel;
+
 
 class ImovelController extends Controller
 {
 
-   private $categoriaModel;
+
+ private $tipoModel;
+ private $finalidadeModel;
+ private $categoriaModel;
+ private $usuarioModel;
+ private $cidadeModel;
+ private $imovelModel;
+ private $fotoModel;
 
 
 
-   public function __construct()
-   {
-    $this->imovelModel = new ImovelModel();
+
+
+
+ public function __construct()
+ {
+    $this->tipoModel = new TipoModel();
+    $this->finalidadeModel = new FinalidadeModel();
     $this->categoriaModel = new CategoriaModel();
-     $this->tipoModel = new TipoModel();
+    $this->usuarioModel = new UsuarioModel();
+    $this->cidadeModel = new CidadeModel();
+    $this->imovelModel = new ImovelModel();
+    $this->fotoModel = new FotoModel();
+    
+    
+    
 
 } 
 
@@ -35,27 +65,143 @@ public function index()
 
 
 
-public function ver(string $slug = '', $id_imovel = '')
+public function ver(string $slug = '', int $id = null)
 {
     $slug = filter_var($slug, FILTER_SANITIZE_STRING);
+    $categoria       = $this->categoriaModel->getPorId($id);
+    $tipo            = $this->tipoModel->getPorId($id);
+    $finalidade      =$this->finalidadeModel->getAll();
+    $listaImovel     = $this->imovelModel->getAllBySlug($slug);
+    $cidade          = $this->cidadeModel->getPorId($id);
+    $listaFoto       = $this->fotoModel->getPorId($id);
 
-    $id_imovel = filter_var($id_imovel, FILTER_SANITIZE_NUMBER_INT);
-
-    $imovel = $this->imovelModel->getBySlug($slug);
-    $categoria = $this->categoriaModel->getPorId($id_imovel);
-    $tipo = $this->tipoModel->getPorId($id_imovel);
-
-    if ($imovel->getSlug() == null)
-        return $this->showMessage('Imovel não encontrado', 'Droga', 404);
-
+        // if ($imovel->getSlug() == null)
+        //     return $this->showMessage('Imovel não encontrado', 'O imovel que você procura não foi encontrado', 404);
 
     $this->view('imovel/ver', [
-        'imovel' => $imovel,
-        'categoria' => $categoria,
-        'tipo' => $tipo
-        
+        'listaImovel'      => $listaImovel,
+        'listaCategoria'   => $categoria,
+        'listaTipo'        => $tipo,
+        'listaFinalidade'  => $finalidade,
+        'listaCidade'      => $cidade,
+        'listaFoto'        => $listaFoto
+    ]);
+
+
+
+}
+
+public function buscar($id_finalidade)
+
+{
+  $pesqIimovel = $this->imovelModel->getPorFinalidade($id_finalidade);
+  $finalidade       = $this->finalidadeModel->getAll();
+  $finalidade  = $this->finalidadeModel->getAll();
+  $maibe =  $finalidade ;
+
+
+
+  if ($pesqIimovel  == null)
+    return $this->showMessage('Ops!!!', 'O Imovel que você procura não foi encontrado. Volte e tente com outros paramentros', 422, $maibe);
+
+$this->view('imovel/pesquisa', [
+    'pesqIimovel' => $pesqIimovel,
+    'listaFinalidade'   => $maibe
+]);
+
+
+}
+
+public function mostrarTodos()
+
+{
+  $pesqIimovel = $this->imovelModel->getAllHome();
+
+  if ($pesqIimovel  == null)
+    return $this->showMessage('Ops!!!', 'O Imovel que você procura não foi encontrado. Volte e tente com outros paramentros', 422);
+
+$this->view('imovel/pesquisa', [
+    'pesqIimovel' => $pesqIimovel,
+    'listaCategoria'   => $categoria
+]);
+
+
+
+}
+
+
+
+public function ultimos()
+{
+    $ultimoImovel = $this->imovelModel->getMax();
+
+    $this->view('home/main', [
+        'ultimoImovel'      => $ultimoImovel
+    ]);
+}
+
+
+public function imovelRand()
+{
+    $randImovel = $this->imovelModel->selectRandon();
+
+    $this->view('home/main', [
+        'randImovel'      => $randImovel
+    ]);
+
+}
+
+public function pesquisar($param = [])
+{ 
+
+  //   //Obtemos o valor da propriedade
+    $array = $param;
+
+   //Removemos o espaço no começo e fim
+    $array = trim($array);
+
+    //Colocamos as letras na minúscula
+    $array = strtolower($array);
+  //Trocamos alguns carácteres por traço
+    $array = str_replace([
+     ' ', '.', ',', '+','&',
+
+     '*', 'sltipo', 'slfinalidade', 'slcategoria', '='
+ ], ' ', $array);
+
+    $novoArray = explode('   ', $array, 3);
+
+    $tipo = $novoArray[0];
+    $finalidade = $novoArray[1];
+    $categoria = $novoArray[2];
+
+
+    $pesqIimovel = $this->imovelModel->pesquisaParam($tipo, $finalidade, $categoria);
+    if ($pesqIimovel  == null)
+        return $this->showMessage('Ops!!!', 'O Imovel que você procura não foi encontrado. Volte e tente com outros paramentros', 422);
+
+
+    $this->view('imovel/pesquisa', [
+        'pesqIimovel'      => $pesqIimovel
     ]);
     
+
+}
+
+
+public function verNaHome()
+{
+    $listaFoto       = $this->fotoModel->getPorId($id);
+    $listaImovel = $this->imovelModel->getAllHome();
+    $this->view('home/main', [
+        'listaImovel'    => $imovel,
+        'listaCategoria' => $categoria,
+        'listaTipo'      => $tipo,
+        'listaUsuario'   => $usuario,
+        'listaFoto'      => $listaFoto
+        
+    ]);
+
 
 }
 
@@ -112,6 +258,8 @@ public function thumb($idImovel = null)
     ]);
 }
 
+
+
 public function updateThumb($idImovel)
 {
     \app\classes\security::protect();
@@ -143,12 +291,12 @@ public function updateThumb($idImovel)
 }
 
 
+
 public function insert()
 {
     \app\classes\security::protect();
 
     $imovel = $this->getInput();
-        // dd($imovel);
 
     if (!$this->validate($imovel, false))
     {
@@ -164,7 +312,7 @@ public function insert()
         return;
     }
 
-    redirect(BASE . 'imovel/editar/' . $result);
+    redirect(BASE . 'imovel/thumb/' . $result);
 }
 
 public function update($id = 0)
@@ -284,6 +432,7 @@ private function getInput($id = null)
         post('txtAdicionais', FILTER_SANITIZE_SPECIAL_CHARS),
         post('slStatus', FILTER_SANITIZE_NUMBER_INT),
         null
+
 
     );
 }

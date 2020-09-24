@@ -25,13 +25,17 @@ owl.owlCarousel({
 	responsive:{
 		0:{
 			items:1,
+			dots:true
 		},
 		600:{
 			items:1,
+			dots:true
 		},
 		1000:{
 			items:1,
+			dots:true,
 			loop:true
+
 		}
 	}
 })

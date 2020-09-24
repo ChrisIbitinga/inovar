@@ -41,6 +41,19 @@ class FinalidadeModel
         return $this->pdo->ExecuteNonQuery($sql, $params);
     }
 
+     public function getPorId($id_imovel)
+    {
+          $sql = 'SELECT DISTINCT f.id_finalidade, f.nome_finalidade, i.id, i.id_destinacao FROM finalidade f
+          inner join imovel i
+          on f.id_finalidade = i.id_destinacao
+           WHERE i.id = :id_imovel';
+
+           return $this->collection($this->pdo->ExecuteQueryOneRow($sql, [
+            ':id_imovel' => $id_imovel
+        ]));
+
+    }
+
     public function getById(int $id_finalidade_finalidade)
     {
         $sql = 'SELECT * FROM finalidade WHERE id_finalidade_finalidade = :id_finalidade_finalidade';

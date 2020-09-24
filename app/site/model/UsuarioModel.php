@@ -102,6 +102,18 @@ class UsuarioModel
 
         return $this->collection($dr);
     }
+      public function getPorId($id_imovel)
+    {
+          $sql = 'SELECT DISTINCT u.id, u.nome, i.id, i.id_usuario FROM usuario u
+          inner join imovel i
+          on u.id = i.id_usuario
+           WHERE i.id = :id_imovel';
+
+           return $this->collection($this->pdo->ExecuteQueryOneRow($sql, [
+            ':id_imovel' => $id_imovel
+        ]));
+
+    }
 
     public function dadosPorEmail(string $email)
     {

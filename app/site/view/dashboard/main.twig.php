@@ -105,7 +105,7 @@ Home
 							</p>
 
 							<p><span class="teal-text text-darken-3 bold-text">Slug:</span>
-								<a href="{{BASE}}imovel/ver/{{imovel.slug}}/ss{{imovel.id}}" target="_blank">{{imovel.slug}}</a> 
+								<a href="{{BASE}}imovel/ver/{{imovel.slug}}/{{imovel.id}}" target="_blank">{{imovel.slug}}</a> 
 							</p>
 							<input type="hidden" name="id_imovel" id="id_imovel" value="{{imove.id}}">
 							<p><span class="teal-text text-darken-3 bold-text">Data de Cadastro:</span> {{imovel.dataCadastro | date(DATE_TIME)}}</p>
@@ -114,6 +114,11 @@ Home
 
 								<span>
 									<a href="{{BASE}}imovel/thumb/{{imovel.id}}" class=" teal-text"><i class="material-icons">camera_alt</i>
+									</a>
+								</span>
+
+								<span>
+									<a href="{{BASE}}foto/nova/{{imovel.id}}" class=" blue-grey-text"><i class="material-icons">image</i>
 									</a>
 								</span>
                                 

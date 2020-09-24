@@ -35,7 +35,7 @@ class Upload
             $name
         );
         
-        $name = uniqid() . $name;
+        $name =  $name;
 
         $path = IMAGE_PATH . $name;
 

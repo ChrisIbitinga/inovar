@@ -1,21 +1,21 @@
+
+
 <header>
 	
 
 	<!-- info bar-->
-	<div class="row blue-grey darken-3 mb-0 bar-info">
+	<div class="row blue-grey darken-3 mb-0 bar-info hide-on-small-only">
 		<div class="container">
-			<div class="row">
-				<div class="col s12 m6">
-					<div class="info">
-						<i class="material-icons">mail</i> 
-						<span class="">contato.inovarimoveisbotucatu@gmail.com </span>
-					</div>
+			<div class="col s12 m6">
+				<div class="info">
+					<i class="material-icons">mail</i> 
+					<span class="">contato@inovarimoveisbotucatu.com </span>
 				</div>
-				<div class="col s12 m6 ">
-					<div class="info flex-end">
-						<i class="material-icons">phone</i> 
-						<span class="">(14) 9 9999-9999 </span>
-					</div>
+			</div>
+			<div class="col s12 m6">
+				<div class="info flex-end">
+					<i class="material-icons">phone</i> 
+					<span class="">(14) 9 9999-9999 </span>
 				</div>
 			</div>
 		</div>
@@ -34,8 +34,12 @@
 
 				<ul id="dropdown1" class="dropdown-content">
 
-					<li><a href="{{BASE}}categoria/ver/locacao">Locação</a></li>
-					<li><a href="{{BASE}}categoria/ver/venda">Venda</a></li>
+					{% for listaFinalidades in listaFinalidade %}
+					<li><a href="{{BASE}}imovel/buscar/{{listaFinalidades.id}}">{{listaFinalidades.nome}}</a></li>
+					{% endfor %}
+
+					
+					<!-- <li><a href="{{BASE}}imovel/buscar/2">Venda</a></li> -->
 
 				</ul>
 				<ul id="dropdown2" class="dropdown-content">
@@ -63,8 +67,6 @@
 						Olá {{userName}}
 						<i class="material-icons right">lock_open</i></a></li>
 						{% endif %}
-
-
 					</ul>
 
 				</div>
@@ -73,15 +75,23 @@
 
 			</div>
 
-
-
 		</nav>
 		<!-- SIDENAV -->
 		<ul class="sidenav" id="mobile-demo">
-			<li><a href="sass.html">Sass</a></li>
-			<li><a href="badges.html">Components</a></li>
-			<li><a href="collapsible.html">Javascript</a></li>
-			<li><a href="mobile.html">Mobile</a></li>
+			<li><a href="{{BASE}}">Inicio</a></li>
+					<li><a href="{{BASE}}about/">Quem somos</a></li>
+					{% if  userNivel != 'user' and userName != null %}
+					<li><a href="{{BASE}}dashboard/main">Painel</a></li>
+					{% endif %}
+					<li><a class="dropdown-trigger left" href="#!" data-target="dropdown2"> 
+						{% if userName == null %}
+						Entrar
+						<i class="material-icons right amber-text">locked</i></a></li>
+
+						{% else %}
+						Olá {{userName}}
+						<i class="material-icons right">lock_open</i></a></li>
+						{% endif %}
 		</ul>
 
 	</header>

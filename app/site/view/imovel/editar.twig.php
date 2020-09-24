@@ -3,7 +3,7 @@
 
 
 {% block title %}
-Cadastrar Novo Imóvel
+Editar Imóvel
 {% endblock %}
 
 
@@ -14,7 +14,7 @@ Cadastrar Novo Imóvel
 	<div class="content white z-depth-3	p-1">
 		<div class="row">
 			<div class="col s12 ">
-				<h4>Novo Imóvel</h4>
+				<h4>Editar Imóvel</h4>
 			</div>
 		</div>
 		<div class="row">
@@ -55,7 +55,7 @@ Cadastrar Novo Imóvel
 				</div>
 
 
-
+				
 				<div class="row">
 					<div class="input-field col s12 m6">
 						<select id="slCategoria" name="slCategoria">
@@ -80,8 +80,8 @@ Cadastrar Novo Imóvel
 				<div class="row">
 
 					<div class="col s12 m6">
-						<i class="material-icons prefix">map</i> 
-						<input id="txtEndereco" type="text" name="txtEndereco" placeholder="Ex: Rua Trêze de Maio"  class="validate">
+						class="material-icons prefix">map</i> 
+						<input id="txtEndereco" type="text" name="txtEndereco" placeholder="Ex: Rua Trêze de Maio"  class="validate" value="">
 						<label for="txtEndereco">Endereco</label>
 					</div>
 
@@ -96,7 +96,7 @@ Cadastrar Novo Imóvel
 						<input id="txtValor" type="text" name="txtValor" placeholder="Ex: 200.000,00"  class="validate">
 						<label for="txtValor">Valor</label>
 					</div>
-
+					
 				</div>
 
 				<div class="row">
@@ -114,7 +114,7 @@ Cadastrar Novo Imóvel
 					</div>
 
 					<div class="col s12 m3">
-						<i class="material-icons prefix">hotel</i> 
+						<i class="material-icons prefix">hotel</i>  
 						<input id="txtQuarto" type="text" name="txtQuarto" placeholder="Ex: 3"  class="validate">
 						<label for="txtQuarto">Número de quarto</label>
 					</div>
@@ -130,7 +130,7 @@ Cadastrar Novo Imóvel
 					</div>
 
 					<div class="col s12 m3">
-						<i class="material-icons prefix">directions_car</i> 
+						<i class="material-icons prefix">directions_car</i>  
 						<input id="txtGaragem" type="text" name="txtGaragem" placeholder="Ex: 1"  class="validate">
 						<label for="txtGaragem">Vagas na Garagem</label>
 					</div>

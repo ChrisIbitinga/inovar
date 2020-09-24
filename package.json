@@ -20,5 +20,8 @@
     "bugs": {
         "url": "https://github.com/ChrisIbitinga/social-sebo/issues"
     },
-    "homepage": "https://github.com/ChrisIbitinga/social-sebo#readme"
+    "homepage": "https://github.com/ChrisIbitinga/social-sebo#readme",
+    "dependencies": {
+        "@ckeditor/ckeditor5-build-classic": "^22.0.0"
+    }
 }

@@ -27,14 +27,17 @@ class  Controller
 		echo $twig->render($view . '.twig.php', $param);
 	}
 
-	protected function showMessage(string $title, string $message, int $httpcode = 404)
+	protected function showMessage(string $title, string $message, int $httpcode = 404, $maibe = null)
 	{
         http_response_code($httpcode);
 		$this->view('partials/message',[
 			'title'    => $title,
             'message'  => $message,
-            'httpcode' => $httpcode 
+            'httpcode' => $httpcode,
+            'listaFinalidade'    => $maibe
 
 		]);
+
+		dd($maibe);
 	}
 }

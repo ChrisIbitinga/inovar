@@ -163,6 +163,24 @@ public function getSlugImovel(string $slug)
           ]));
         }
 
+        public function getPorFinalidade($id_finalidade)
+        {
+          $sql = 'SELECT * FROM imovel WHERE id_destinacao = :id_finalidade ORDER BY data_cadastro DESC';
+          $param = [
+            'id_finalidade' => $id_finalidade
+          ];
+
+          $dt = $this->pdo->ExecuteQuery($sql, $param);
+
+          $list = [];
+
+          foreach ($dt as $dr)
+            $list[] = $this->collection($dr);
+
+          return $list;
+        }
+
+
 
         public function getAll()
         {
@@ -178,40 +196,342 @@ public function getSlugImovel(string $slug)
           return $list;
         }
 
-        public function getBySlug(string $slug)
+        public function getAllBySlug(string $slug)
         {
-         $sql = 'SELECT DISTINCT i.id, i.data_cadastro, i.endereco, i.numero, i.valor, i.bairro, i.sala, i.quarto, i.banheiro, i.garagem, i.slug, i.adicionais, i.status, i.thumb,
-         t.nome_tipo as tipo_nome, 
-         f.nome_finalidade as finalidade_nome, 
-         c.nome_categoria as  categoria_nome, 
-         u.nome as usuario_nome, 
-         d.nome_cidade as cidade_nome
-         FROM imovel i  
-         inner join tipo t
-         ON t.id_tipo  = i.id_tipo 
-         inner join finalidade f
-         ON f.id_finalidade  = i.id_destinacao
-         inner join categoria c
-         ON c.id_categoria = i.id_categoria 
-         inner join usuario u  
-         ON u.id  = i.id_usuario
-         inner join cidade d
-         ON d.id_cidade  = i.id_cidade
-         WHERE LOWER(i.slug) =  :slug
-         GROUP BY id_destinacao
 
-         ';
-         $params = [
-          ':slug' => $slug
+          $sql = 'SELECT DISTINCT i.id, i.data_cadastro, i.endereco, i.numero, i.valor, i.bairro, i.sala, i.quarto, i.banheiro, i.garagem, i.slug, i.adicionais, i.status, i.thumb, 
+          t.id_tipo as id_tipo,
+          t.nome_tipo as nome_tipo,
+
+          f.id_finalidade as id_finalidade,
+          f.nome_finalidade as finalidade_nome, 
+
+          c.id_categoria as  id_categoria, 
+          c.nome_categoria as  nome_categoria, 
+
+
+          d.id_cidade as id_cidade,
+          d.nome_cidade as nome_cidade
+
+
+
+          FROM imovel i
+          inner join tipo t 
+          ON i.id_tipo = t.id_tipo
+          inner join finalidade f
+          on i.id_destinacao = f.id_finalidade
+          inner join categoria c 
+          on i.id_categoria = c.id_categoria
+          inner join cidade d 
+          on i.id_cidade = d.id_cidade
+          where i.slug = :slug
+          order by f.nome_finalidade
+          ';
+
+          $param = [
+            ':slug' => $slug
+          ];
+
+          $dt = $this->pdo->ExecuteQuery($sql, $param);
+          $list = [];
+
+          foreach ($dt as $dr)
+            $list[] = $dr;
+
+          return $list;
+          dd($list);
+
+
+        }
+
+        public function pesquisaParam(int $tipo, int $finalidade, int $categoria )
+        {
+
+          $sql = 'SELECT DISTINCT i.id, i.data_cadastro, i.endereco, i.numero, i.valor, i.bairro, i.sala, i.quarto, i.banheiro, i.garagem, i.slug, i.adicionais, i.status, i.thumb, 
+          t.id_tipo as id_tipo,
+          t.nome_tipo as nome_tipo,
+
+          f.id_finalidade as id_finalidade,
+          f.nome_finalidade as finalidade_nome, 
+
+          c.id_categoria as  id_categoria, 
+          c.nome_categoria as  nome_categoria, 
+
+
+          d.id_cidade as id_cidade,
+          d.nome_cidade as nome_cidade
+
+
+
+          FROM imovel i
+          inner join tipo t 
+          ON i.id_tipo = t.id_tipo
+          inner join finalidade f
+          on i.id_destinacao = f.id_finalidade
+          inner join categoria c 
+          on i.id_categoria = c.id_categoria
+          inner join cidade d 
+          on i.id_cidade = d.id_cidade
+          -- TIPO 2
+          where i.id_tipo = :id_tipo 
+          AND
+          -- FINALIDADE 2
+          i.id_destinacao = :id_finalidade
+          AND
+          -- CATEGORIA 1
+          i.id_categoria = :id_categoria
+          ';
+
+          $param = [
+            ':id_tipo' => $tipo,
+            ':id_finalidade' => $finalidade,
+            ':id_categoria' => $categoria
+          ];
+
+          $dt = $this->pdo->ExecuteQuery($sql, $param);
+          $list = [];
+
+          foreach ($dt as $dr)
+            $list[] = $dr;
+
+          return $list;
+          // dd($list);
+
+
+        }
+
+        public function selectRandon()
+        {
+          $sql= 'SELECT DISTINCT i.id, i.data_cadastro, i.endereco, i.numero, i.valor, i.bairro, i.sala, i.quarto, i.banheiro, i.garagem, i.slug, i.adicionais, i.status, i.thumb, 
+          t.id_tipo as id_tipo,
+          t.nome_tipo as nome_tipo,
+
+          f.id_finalidade as id_finalidade,
+          f.nome_finalidade as finalidade_nome, 
+
+          c.id_categoria as  id_categoria, 
+          c.nome_categoria as  nome_categoria, 
+
+        -- u.id as id, 
+        -- u.nome as nome, 
+
+        d.id_cidade as id_cidade,
+        d.nome_cidade as nome_cidade
+
+
+
+        FROM imovel i
+        inner join tipo t 
+        ON i.id_tipo = t.id_tipo
+        inner join finalidade f
+        on i.id_destinacao = f.id_finalidade
+        inner join categoria c 
+        on i.id_categoria = c.id_categoria
+        
+        inner join cidade d 
+        on i.id_cidade = d.id_cidade
+        ORDER BY RAND()
+        LIMIT 1';
+
+        $dt = $this->pdo->ExecuteQuery($sql);
+        $list = [];
+
+        foreach ($dt as $dr)
+          $list[] = $dr;
+
+        return $list;
+        // dd($list);
+      }
+
+      public function getMax()
+      {
+       $sql = 'SELECT DISTINCT i.id, i.data_cadastro, i.endereco, i.numero, i.valor, i.bairro, i.sala, i.quarto, i.banheiro, i.garagem, i.slug, i.adicionais, i.status, i.thumb, 
+       t.id_tipo as id_tipo,
+       t.nome_tipo as nome_tipo,
+
+       f.id_finalidade as id_finalidade,
+       f.nome_finalidade as finalidade_nome, 
+
+       c.id_categoria as  id_categoria, 
+       c.nome_categoria as  nome_categoria, 
+
+        -- u.id as id, 
+        -- u.nome as nome, 
+
+        d.id_cidade as id_cidade,
+        d.nome_cidade as nome_cidade
+
+
+
+        FROM imovel i
+        inner join tipo t 
+        ON i.id_tipo = t.id_tipo
+        inner join finalidade f
+        on i.id_destinacao = f.id_finalidade
+        inner join categoria c 
+        on i.id_categoria = c.id_categoria
+        
+        inner join cidade d 
+        on i.id_cidade = d.id_cidade
+        order by i.data_cadastro DESC 
+        LIMIT 6
+        ';
+
+
+
+
+        $dt = $this->pdo->ExecuteQuery($sql);
+        $list = [];
+
+        foreach ($dt as $dr)
+          $list[] = $dr;
+
+        return $list;
+        // dd($list);
+      }
+
+
+      public function pesquisarPorParametros($tipo, $finalidade, $categoria)
+      {
+
+        $sql = 'SELECT DISTINCT i.id, i.data_cadastro, i.endereco, i.numero, i.valor, i.bairro, i.sala, i.quarto, i.banheiro, i.garagem, i.slug, i.adicionais, i.status, i.thumb, 
+        t.id_tipo as id_tipo,
+        t.nome_tipo as nome_tipo,
+
+        f.id_finalidade as id_finalidade,
+        f.nome_finalidade as finalidade_nome, 
+
+        c.id_categoria as  id_categoria, 
+        c.nome_categoria as  nome_categoria, 
+
+        -- u.id as id, 
+        -- u.nome as nome, 
+
+        d.id_cidade as id_cidade,
+        d.nome_cidade as nome_cidade
+
+
+
+        FROM imovel i
+        inner join tipo t 
+        ON i.id_tipo = t.id_tipo
+        inner join finalidade f
+        on i.id_destinacao = f.id_finalidade
+        inner join categoria c 
+        on i.id_categoria = c.id_categoria
+        
+        inner join cidade d 
+        on i.id_cidade = d.id_cidade
+        WHERE i.id_tipo = :tipo
+        AND i.id_destinacao = :finalidade
+        AND i.id_categoria = :categoria
+
+        ';
+//categoria  residencial 1
+//finalidade  venda 2
+// tipo terreno 2
+        
+
+        $params = [
+          ':tipo'         => $tipo,
+          ':finalidade' => $finalidade,
+          ':categoria'  => $categoria
         ];
 
-        $dr = $this->pdo->ExecuteQueryOneRow($sql, $params);
+        dd($params);
 
-        return $this->collection($dr);
+        $dt = $this->pdo->ExecuteQuery($sql, $params);
+        $list = [];
 
+        foreach ($dt as $dr)
+          $list[] = $dr;
+
+        return $list;
+        // dd($list);
 
       }
 
+
+
+      public function getBySlug(string $slug)
+      {
+       $sql = 'SELECT DISTINCT i.id, i.data_cadastro, i.endereco, i.numero, i.valor, i.bairro, i.sala, i.quarto, i.banheiro, i.garagem, i.slug, i.adicionais, i.status, i.thumb,
+       t.nome_tipo as tipo_nome, 
+       f.nome_finalidade as finalidade_nome, 
+       c.nome_categoria as  categoria_nome, 
+       u.nome as usuario_nome, 
+       d.nome_cidade as cidade_nome
+       FROM imovel i  
+       inner join tipo t
+       ON t.id_tipo  = i.id_tipo 
+       inner join finalidade f
+       ON f.id_finalidade  = i.id_destinacao
+       inner join categoria c
+       ON c.id_categoria = i.id_categoria 
+       inner join usuario u  
+       ON u.id  = i.id_usuario
+       inner join cidade d
+       ON d.id_cidade  = i.id_cidade
+       WHERE LOWER(i.slug) =  :slug
+       GROUP BY id_destinacao
+
+       ';
+       $params = [
+        ':slug' => $slug
+      ];
+
+      $dr = $this->pdo->ExecuteQueryOneRow($sql, $params);
+
+      return $this->collection($dr);
+
+
+    }
+
+    public function getAllHome()
+    {
+
+      $sql = 'SELECT DISTINCT i.id, i.data_cadastro, i.endereco, i.numero, i.valor, i.bairro, i.sala, i.quarto, i.banheiro, i.garagem, i.slug, i.adicionais, i.status, i.thumb, 
+      t.id_tipo as id_tipo,
+      t.nome_tipo as nome_tipo,
+
+      f.id_finalidade as id_finalidade,
+      f.nome_finalidade as finalidade_nome, 
+
+      c.id_categoria as  id_categoria, 
+      c.nome_categoria as  nome_categoria, 
+
+        -- u.id as id, 
+        -- u.nome as nome, 
+
+        d.id_cidade as id_cidade,
+        d.nome_cidade as nome_cidade
+
+
+
+        FROM imovel i
+        inner join tipo t 
+        ON i.id_tipo = t.id_tipo
+        inner join finalidade f
+        on i.id_destinacao = f.id_finalidade
+        inner join categoria c 
+        on i.id_categoria = c.id_categoria
+        
+        inner join cidade d 
+        on i.id_cidade = d.id_cidade
+        order by i.data_cadastro DESC
+        ';
+
+        $dt = $this->pdo->ExecuteQuery($sql);
+        $list = [];
+
+        foreach ($dt as $dr)
+          $list[] = $dr;
+
+        return $list;
+        // dd($list);
+
+
+      }
 
 
 
@@ -273,9 +593,9 @@ public function getSlugImovel(string $slug)
               $param['nome_tipo'] ?? null
             ),
             new Finalidade(
-            $param['id_finalidade'] ?? null,
-             $param['nome_finalidade'] ?? null
-           ),
+              $param['id_finalidade'] ?? null,
+              $param['nome_finalidade'] ?? null
+            ),
             new Categoria(
              $param['id_categoria'] ?? null,
              $param['nome_categoria'] ?? null
@@ -298,7 +618,7 @@ public function getSlugImovel(string $slug)
             $param['banheiro'] ?? null,
             $param['garagem'] ?? null,
             $param['slug'] ?? null,
-            html_entity_decode($param['adicionais'] ?? null),
+            $param['adicionais'] ?? null,
             $param['status'] ?? null,
             $param['thumb'] ?? null,
 

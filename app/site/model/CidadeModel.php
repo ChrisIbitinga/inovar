@@ -50,6 +50,19 @@ class CidadeModel
         ]));
     }
 
+     public function getPorId($id_imovel)
+    {
+          $sql = 'SELECT DISTINCT d.id_cidade, d.nome_cidade, i.id, i.id_cidade FROM cidade d
+          inner join imovel i
+          on d.id_cidade = i.id_cidade
+           WHERE i.id = :id_imovel';
+
+           return $this->collection($this->pdo->ExecuteQueryOneRow($sql, [
+            ':id_imovel' => $id_imovel
+        ]));
+
+    }
+
     public function getBySlug(string $slug_cidade)
     {
         $sql = 'SELECT nome_cidade FROM cidade WHERE slug_cidade = :slug_cidade';
