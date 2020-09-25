@@ -113,18 +113,18 @@ Home
 							<div class="secondary-content teal-text">
 
 								<span>
-									<a href="{{BASE}}imovel/thumb/{{imovel.id}}" class=" teal-text"><i class="material-icons">camera_alt</i>
+									<a href="{{BASE}}imovel/thumb/{{imovel.id}}" class=" teal-text  tooltipped" data-position="bottom" data-tooltip="Capa" ><i class="material-icons">camera_alt</i>
 									</a>
 								</span>
 
 								<span>
-									<a href="{{BASE}}foto/nova/{{imovel.id}}" class=" blue-grey-text"><i class="material-icons">image</i>
+									<a href="{{BASE}}foto/nova/{{imovel.id}}" class=" blue-grey-text tooltipped" data-position="bottom" data-tooltip="Fotos"><i class="material-icons">image</i>
 									</a>
 								</span>
                                 
                                 
 								<span>
-									<a href="{{BASE}}imovel/editar/{{imovel.id}}" class="m-l-1 amber-text text-darken-2"><i class="material-icons">edit</i></a>	
+									<a href="{{BASE}}imovel/editar/{{imovel.id}}" class="m-l-1 amber-text text-darken-2 tooltipped" data-position="bottom" data-tooltip="Editar"><i class="material-icons">edit</i></a>	
 								</span>
 							</div>
 

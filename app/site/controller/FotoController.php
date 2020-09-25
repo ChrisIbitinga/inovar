@@ -40,12 +40,17 @@ class FotoController extends Controller
 
     public function insert()
 {
-    \app\classes\security::protect();
+    \app\classes\Security::protect();
 
-   // $nome = post('flFoto', FILTER_SANITIZE_STRING);
+  $imovel = post('slImovel', FILTER_SANITIZE_NUMBER_INT);
    // $id = post('slImovel', FILTER_SANITIZE_NUMBER_INT);
 
-   $foto = $this->getInput();
+
+
+if($imovel <= 0 || $imovels = null){
+     $this->showMessage('Erro ao cadastrar', 'Você não selecionou o id do imovel.', 500);
+        return;
+}
 
 
     $result = $this->fotoModel->insert($foto);
@@ -76,7 +81,7 @@ class FotoController extends Controller
 
 public function nova()
 {
-    \app\classes\security::protect();
+    \app\classes\Security::protect();
 
     $imovel = $this->imovelModel->getAll();
 
@@ -87,7 +92,7 @@ public function nova()
 
     // public function nova()
     // {
-    // 	\app\classes\security::protect();
+    // 	\app\classes\Security::protect();
     // 	$foto = $this->fotoModel->getAllHome();
 
     // 	$listaImovel = $this->imovelModel->getAllHome();
@@ -100,7 +105,7 @@ public function nova()
 
     public function foto($idImovel = null)
 {
-    \app\classes\security::protect();
+    \app\classes\Security::protect();
 
     $idImovel = filter_var($idImovel, FILTER_SANITIZE_STRING);
 
@@ -117,7 +122,7 @@ public function nova()
 
     // public function insert()
     // {
-    // 	\app\classes\security::protect();
+    // 	\app\classes\Security::protect();
 
     // 	$foto = $this->getInput();
 
@@ -140,7 +145,7 @@ public function nova()
 
     public function editar($id = 0)
     {
-    	\app\classes\security::protect();
+    	\app\classes\Security::protect();
 
     	$id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
 
@@ -160,7 +165,7 @@ public function nova()
 
     public function update($id = 0)
     {
-    	\app\classes\security::protect();
+    	\app\classes\Security::protect();
 
     	$foto = $this->getInput($id);
 

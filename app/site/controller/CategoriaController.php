@@ -48,7 +48,7 @@ class CategoriaController extends Controller
 
     public function lista()
     {
-        \app\classes\security::protect();
+        \app\classes\Security::protect();
         $this->view('categoria/lista-categoria', [
             'categorias' => $this->categoriaModel->getAll()
         ]);
@@ -56,13 +56,13 @@ class CategoriaController extends Controller
 
     public function nova()
     {
-        \app\classes\security::protect();
+        \app\classes\Security::protect();
         $this->view('categoria/nova');
     }
 
     public function editar($id = 0)
     {
-        \app\classes\security::protect();
+        \app\classes\Security::protect();
 
         $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
 
@@ -83,7 +83,7 @@ class CategoriaController extends Controller
 
     public function insert()
     {
-        \app\classes\security::protect();
+        \app\classes\Security::protect();
 
         $categoria = $this->getInput();
 
@@ -104,7 +104,7 @@ class CategoriaController extends Controller
 
     public function update($id = 0)
     {
-        \app\classes\security::protect();
+        \app\classes\Security::protect();
 
         $categoria = $this->getInput($id);
 

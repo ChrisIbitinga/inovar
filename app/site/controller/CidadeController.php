@@ -50,7 +50,7 @@ class CidadeController extends Controller
 
     public function lista()
     {
-        \app\classes\security::protect();
+        \app\classes\Security::protect();
         $this->view('cidade/lista-cidade', [
             'cidades' => $this->cidadeModel->getAll()
         ]);
@@ -58,13 +58,13 @@ class CidadeController extends Controller
 
     public function nova()
     {
-        \app\classes\security::protect();
+        \app\classes\Security::protect();
         $this->view('cidade/nova');
     }
 
     public function editar($id = 0)
     {
-        \app\classes\security::protect();
+        \app\classes\Security::protect();
 
         $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
 
@@ -85,7 +85,7 @@ class CidadeController extends Controller
 
     public function insert()
     {
-        \app\classes\security::protect();
+        \app\classes\Security::protect();
 
         $cidade = $this->getInput();
 
@@ -106,7 +106,7 @@ class CidadeController extends Controller
 
     public function update($id = 0)
     {
-        \app\classes\security::protect();
+        \app\classes\Security::protect();
 
         $cidade = $this->getInput($id);
 

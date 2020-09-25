@@ -23,7 +23,7 @@ Cadastrar Nova Finalidade
 			</div>
 			<div class="col s12 m6 ">
 				<form class="form-login" action="{{BASE}}finalidade/insert" method="post" id="frmCadastro"
-				 onsubmit="return validarCadastro(false);">
+				 onsubmit="return validarFinalidade(false);">
 					<div class="input-field col s12">
 						<i class="material-icons prefix">layers</i> 
 						<input id="txtNome" type="text" name="txtNome" placeholder="Diária"  class="validate">
@@ -37,7 +37,7 @@ Cadastrar Nova Finalidade
 					
 						<div class="col s12">
 							<div class="col s6">
-								<a href="{{BASE}}finalidade/lista"  class="amber-text text-darken-2 waves-effect waves-light right">Voltar
+								<a href="{{BASE}}dashboard"  class="amber-text text-darken-2 waves-effect waves-light right">Voltar
 									<i class="material-icons left">arrow_back</i>
 								</a>
 							</div>
@@ -64,5 +64,5 @@ Cadastrar Nova Finalidade
 
 {% block script %}
 
-<script src="{{BASE}}assets/js/categoria.min.js"></script>
+<script src="{{BASE}}assets/js/finalidade.min.js"></script>
 {% endblock %}

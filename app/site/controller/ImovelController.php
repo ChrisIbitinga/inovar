@@ -211,7 +211,7 @@ public function verNaHome()
 
 public function novo()
 {
-    \app\classes\security::protect();
+    \app\classes\Security::protect();
 
     $this->view('imovel/novo', [
         'tipos'       => (new \app\site\model\TipoModel())->getAll(),
@@ -223,7 +223,7 @@ public function novo()
 
 public function editar($idImovel = null)
 {
-    \app\classes\security::protect();
+    \app\classes\Security::protect();
 
     $idImovel = filter_var($idImovel, FILTER_SANITIZE_NUMBER_INT);
     $userId  = \app\classes\Session::getValue('id');
@@ -245,7 +245,7 @@ public function editar($idImovel = null)
 
 public function thumb($idImovel = null)
 {
-    \app\classes\security::protect();
+    \app\classes\Security::protect();
 
     $idImovel = filter_var($idImovel, FILTER_SANITIZE_STRING);
     $userId  = \app\classes\Session::getValue('id');
@@ -262,7 +262,7 @@ public function thumb($idImovel = null)
 
 public function updateThumb($idImovel)
 {
-    \app\classes\security::protect();
+    \app\classes\Security::protect();
 
     $idImovel = filter_var($idImovel, FILTER_SANITIZE_STRING);
     $userId = \app\classes\Session::getValue('id');
@@ -294,7 +294,7 @@ public function updateThumb($idImovel)
 
 public function insert()
 {
-    \app\classes\security::protect();
+    \app\classes\Security::protect();
 
     $imovel = $this->getInput();
 
@@ -317,7 +317,7 @@ public function insert()
 
 public function update($id = 0)
 {
-    \app\classes\security::protect();
+    \app\classes\Security::protect();
 
     $imovel = $this->getInput($id);
     $userId  = \app\classes\Session::getValue('id');

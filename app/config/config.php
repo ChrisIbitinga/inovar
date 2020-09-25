@@ -10,10 +10,29 @@ define('SECURITY_REDIRECT', BASE. 'login/');
 
 define('REMOVE_INDEX_COUNT', 1);
 
+
+
+//LOCAL
 define('DB_HOST', 'localhost');
+//PRODUÇÂO
+// define('DB_HOST', 'sql208.epizy.com');
+
+//LOCAL
 define('DB_USER', 'root');
+//PRODUÇÂO
+// define('DB_USER', 'epiz_26811167');
+
+//LOCAL
 define('DB_PASS', '');
+//PRODUÇÂO
+// define('DB_PASS', 'L23j7xJZdA412');
+
+
+//LOCAL
 define('DB_NAME', 'inovar');
+
+//PRODUÇÂO
+// define('DB_NAME', 'epiz_26811167_inovar');
 
 //EMAIL
 define('MAIL_USER', ''); //E-mail de login

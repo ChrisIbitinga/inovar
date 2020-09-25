@@ -51,6 +51,15 @@
 					<li><a href="{{BASE}}login/logout" onclick="return confirm('Deseja realmente sair?')">Sair</a></li>
 					{% endif %}
 				</ul>
+					<ul id="dropdown3" class="dropdown-content">
+					<li><a href="{{BASE}}login/main">Login</a></li>
+
+					{% if userName != null %}
+					<li><a href="{{BASE}}login/editar">Editar</a></li>
+					<li><a href="{{BASE}}login/senha">Alterar senha</a></li>
+					<li><a href="{{BASE}}login/logout" onclick="return confirm('Deseja realmente sair?')">Sair</a></li>
+					{% endif %}
+				</ul>
 				<ul class="right hide-on-med-and-down">
 					<li><a href="{{BASE}}">Inicio</a></li>
 					<li><a href="{{BASE}}about/">Quem somos</a></li>
@@ -83,7 +92,7 @@
 					{% if  userNivel != 'user' and userName != null %}
 					<li><a href="{{BASE}}dashboard/main">Painel</a></li>
 					{% endif %}
-					<li><a class="dropdown-trigger left" href="#!" data-target="dropdown2"> 
+					<li><a class="dropdown-trigger left" href="#!" data-target="dropdown3"> 
 						{% if userName == null %}
 						Entrar
 						<i class="material-icons right amber-text">locked</i></a></li>

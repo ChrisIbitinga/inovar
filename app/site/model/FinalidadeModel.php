@@ -54,12 +54,12 @@ class FinalidadeModel
 
     }
 
-    public function getById(int $id_finalidade_finalidade)
+    public function getById(int $id_finalidade)
     {
-        $sql = 'SELECT * FROM finalidade WHERE id_finalidade_finalidade = :id_finalidade_finalidade';
+        $sql = 'SELECT * FROM finalidade WHERE id_finalidade = :id_finalidade';
 
         return $this->collection($this->pdo->ExecuteQueryOneRow($sql, [
-            ':id_finalidade_finalidade' => $id_finalidade_finalidade
+            ':id_finalidade' => $id_finalidade
         ]));
     }
 

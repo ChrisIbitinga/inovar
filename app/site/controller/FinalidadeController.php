@@ -48,7 +48,7 @@ class FinalidadeController extends Controller
 
     public function lista()
     {
-        \app\classes\security::protect();
+        \app\classes\Security::protect();
         $this->view('finalidade/lista-finalidade', [
             'finalidades' => $this->finalidadeModel->getAll()
         ]);
@@ -56,19 +56,19 @@ class FinalidadeController extends Controller
 
     public function inputSelectFinalidade()
     {
-        \app\classes\security::protect();
+        \app\classes\Security::protect();
         $selectFinalidade =  $this->finalidadeModel->getAll();
     }
 
     public function nova()
     {
-        \app\classes\security::protect();
+        \app\classes\Security::protect();
         $this->view('finalidade/nova');
     }
 
     public function editar($id = 0)
     {
-        \app\classes\security::protect();
+        \app\classes\Security::protect();
 
         $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
 
@@ -89,7 +89,7 @@ class FinalidadeController extends Controller
 
     public function insert()
     {
-        \app\classes\security::protect();
+        \app\classes\Security::protect();
 
         $finalidade = $this->getInput();
 
@@ -110,7 +110,7 @@ class FinalidadeController extends Controller
 
     public function update($id = 0)
     {
-        \app\classes\security::protect();
+        \app\classes\Security::protect();
 
         $finalidade = $this->getInput($id);
 

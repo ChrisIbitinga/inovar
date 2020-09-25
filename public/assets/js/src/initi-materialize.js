@@ -5,6 +5,7 @@
   	$('.sidenav').sidenav();
   	$('.slider').slider();
   	 $('.collapsible').collapsible();
+  	  $('.tooltipped').tooltip();
   });
 
 

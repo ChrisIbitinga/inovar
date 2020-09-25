@@ -51,7 +51,7 @@ class TipoController extends Controller
 
     public function lista()
     {
-        \app\classes\security::protect();
+        \app\classes\Security::protect();
         $this->view('tipo/lista-tipo', [
             'tipos' => $this->tipoModel->getAll()
         ]);
@@ -59,19 +59,19 @@ class TipoController extends Controller
 
     public function inputSelectTipo()
     {
-        \app\classes\security::protect();
+        \app\classes\Security::protect();
         $selectTipo =  $this->tipoModel->getAll();
     }
 
     public function novo()
     {
-        \app\classes\security::protect();
+        \app\classes\Security::protect();
         $this->view('tipo/novo');
     }
 
     public function editar($id = 0)
     {
-        \app\classes\security::protect();
+        \app\classes\Security::protect();
 
         $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
 
@@ -92,7 +92,7 @@ class TipoController extends Controller
 
     public function insert()
     {
-        \app\classes\security::protect();
+        \app\classes\Security::protect();
 
         $tipo = $this->getInput();
 
@@ -113,7 +113,7 @@ class TipoController extends Controller
 
     public function update($id = 0)
     {
-        \app\classes\security::protect();
+        \app\classes\Security::protect();
 
         $tipo = $this->getInput($id);
 

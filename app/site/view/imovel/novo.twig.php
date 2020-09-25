@@ -26,9 +26,9 @@ Cadastrar Novo Imóvel
 				onsubmit="return validarCadastro(false);">
 
 				<div class="row ">
-					<input type="hidden" id="txtUsuario" name="txtUsuario" value="{{indentiteUser}}">
+					<input type="hidden" id="txtUsuario" name="txtUsuario" value="{{indentiteUser}}" >
 					<div class="input-field col s12 m4">
-						<select id="slTipo" name="slTipo">
+						<select id="slTipo" name="slTipo" required="true">
 							<option value="" disabled selected>Ex: Casa</option>
 							{% for tipo in tipos %}
 							<option  value="{{tipo.id}}">{{tipo.nome}}</option>
@@ -37,7 +37,7 @@ Cadastrar Novo Imóvel
 					</div>
 
 					<div class="input-field col s12 m4">
-						<select id="slFinalidade" name="slFinalidade">
+						<select id="slFinalidade" name="slFinalidade"s>
 							<option value="" disabled selected>Ex: A venda</option>
 							{% for finalidade in finalidades %}
 							<option  value="{{finalidade.id}}">{{finalidade.nome}}</option>

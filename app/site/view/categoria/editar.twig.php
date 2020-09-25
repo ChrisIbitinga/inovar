@@ -23,7 +23,7 @@ Editar Categoria
 			</div>
 			<div class="col s12 m6 ">
 				<form class="form-login" action="{{BASE}}categoria/update/{{categoria.id}}" method="post" id="frmCadastro"
-				 onsubmit="return validarCadastro(false);">
+				 onsubmit="return validarCategoria(false);">
 					<div class="input-field col s12">
 						<i class="material-icons prefix">layers</i> 
 						<input id="txtNome" type="text" name="txtNome" placeholder="Diária"  class="validate" value="{{categoria.nome}}">
@@ -37,7 +37,7 @@ Editar Categoria
 					
 						<div class="col s12">
 							<div class="col s6">
-								<a href="{{BASE}}categoria/lista"  class="amber-text text-darken-2 waves-effect waves-light right">Voltar
+								<a href="{{BASE}}dashboard"  class="amber-text text-darken-2 waves-effect waves-light right">Voltar
 									<i class="material-icons left">arrow_back</i>
 								</a>
 							</div>
@@ -64,5 +64,5 @@ Editar Categoria
 
 {% block script %}
 
-<script src="{{BASE}}assets/js/categoria.min.js"></script>
+v
 {% endblock %}

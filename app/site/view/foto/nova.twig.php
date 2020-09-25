@@ -33,8 +33,9 @@ Nova Foto
 			</div>
 
 
+
 			<div class="col s12 m6 ">
-				<form action="{{BASE}}foto/insert/" method="post" id="frmFoto" onsubmit="return validarFoto();" enctype="multipart/form-data">
+				<form action="{{BASE}}foto/insert/{{idImovel}}" method="post" id="frmFoto" onsubmit="return validarFoto();" enctype="multipart/form-data">
 					
 					<div class="row">
 						<div class="col s12 ">
@@ -65,11 +66,6 @@ Nova Foto
 							</select>
 						</div>
 					</div>
-
-					
-
-
-
 
 					<div class="row">
 						<div class="col s12">
@@ -103,5 +99,5 @@ Nova Foto
 
 
 {% block script %}
-<script src="{{BASE}}assets/js/livro.min.js"></script>
+<script src="{{BASE}}assets/js/foto.min.js"></script>
 {% endblock %}

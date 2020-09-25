@@ -23,7 +23,7 @@ Cadastrar Nova categoria
 			</div>
 			<div class="col s12 m6 ">
 				<form class="form-login" action="{{BASE}}categoria/insert" method="post" id="frmCadastro"
-				 onsubmit="return validarCadastro(false);">
+				 onsubmit="return validarCategoria(false);">
 					<div class="input-field col s12">
 						<i class="material-icons prefix">layers</i> 
 						<input id="txtNome" type="text" name="txtNome" placeholder="Diária"  class="validate">

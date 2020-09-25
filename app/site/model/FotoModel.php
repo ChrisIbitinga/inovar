@@ -21,12 +21,12 @@ class FotoModel
 
 
 
-	public function insert(Foto $foto)
+	public function insert(Foto $foto, $idImovel)
 	{
 		$sql = 'INSERT INTO foto (nome_foto, id_imovel) VALUES (:nome_foto, :id_imovel) ';
 		$params  = [
 			':nome_foto' => $foto->getNomeFoto(),
-			':id_imovel' => $foto->getIdImovel()
+			':id_imovel' => $idImovel
 		];
 
 
